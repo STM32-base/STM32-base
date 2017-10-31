@@ -20,3 +20,9 @@ Before you can start using the code in this repository, you'll need to have some
 * Build essentials. You need these to use the make files provided by this repo. For Debian / Ubuntu / Mint based systems, install `build-essentials` with apt-get.
 * The open source version of the st-link tools. See [their github page](https://github.com/texane/stlink) for installation instructions. This will be used for flashing the micro controller with an st-link (clone or official device).
 * The CMSIS found in the STM32 F0 / F1 Cube packages provided by ST Microelectronics. The CMSIS folder can be anywhere on your system, as long as you link the CMSIS folder itself on the root of this repo, you should be fine.
+
+## Template projects
+
+Template projects can now be found in their own repositories. This repository only contains the needed files to compile and link your code for use with STM32 devices. See the [STM32-base-F0-template](https://github.com/ThomasGravekamp/STM32-base-F0-template) and the [STM32-base-F1-template](https://github.com/ThomasGravekamp/STM32-base-F1-template) repositories. These templates require this repository to be linked or cloned directly into the template folder.
+
+Note: the makefile assumes the `/obj` and `/bin` folders to be present in the template folder. For now, you should create these yourself.
