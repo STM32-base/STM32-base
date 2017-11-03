@@ -11,35 +11,35 @@
 .weak Reset_Handler
 .type Reset_Handler, %function
 Reset_Handler:
-    mov  r0, #0      // var i = 0
-    ldr  r1, = _sdata  // Start of data in RAM
-    ldr  r2, = _edata  // End of data in RAM
-    ldr  r3, = _sidata // Start of data in FLASH
+    movs r0, #0        // var i = 0
+    ldr  r1, = _sdata  // var startData = 0x...
+    ldr  r2, = _edata  // var endData = 0x...
+    ldr  r3, = _sidata // var startDataInFlash = 0x...
 
     b    LoopCopyDataInit
 
 // Copy over the initialized global variables
 CopyDataInit:
-    ldr  r5, [r3, r0] // var temp = *(sidata+i)
-    str  r5, [r1, r0] // sdata+i = temp
-    add  r0, r0, #4   // i += 4
+    ldr  r4, [r3, r0] // var temp = *(startDataInFlash+i)
+    str  r4, [r1, r0] // startData+i = temp
+    adds r0, r0, #4   // i += 4
 
 LoopCopyDataInit:
-    adds r4, r1, r0 // var startoffset = sdata + i
-    cmp  r4, r2     // while startoffset < edata
+    adds r1, r1, r0   // var startoffset = startData + i
+    cmp  r1, r2       // while startoffset < endData
     bcc  CopyDataInit
 
-    mov  r0, #0       // i = 0
+    movs r0, #0       // i = 0
     ldr  r1, = _sbss  // Start of uninit data in RAM
     ldr  r2, = _ebss  // End of uninit data in RAM
     b    LoopFillZerobss
 
 FillZerobss:
-    str  r0, [r1], #4 // sbss = i
-                      // sbss += 4
+    str  r0, [r1]     // *sbss = i
+    adds r1, r1, #4   // sbss += 4
 
 LoopFillZerobss:
-    cmp  r1, r2      // while sbss < ebss
+    cmp  r1, r2       // while sbss < ebss
     bcc  FillZerobss
 
     bl SystemInit

@@ -64,6 +64,7 @@ CFLAGS += -Wl,-T,$(BASE_LINKER)/$(SERIES_FOLDER)/$(DEVICE).ld
 CFLAGS += -I./src
 CFLAGS += -I$(BASE_CMSIS)/Include
 CFLAGS += -I$(BASE_CMSIS)/Device/ST/$(SERIES_FOLDER)/Include
+CFLAGS += -I$(BASE_STARTUP)
 
 # Flags - Machine-dependant options
 CFLAGS += -mcpu=$(SERIES_CPU)
@@ -87,6 +88,7 @@ SRC  = $(SRC_FOLDER)/*.c
 SRC += $(BASE_CMSIS)/$(SERIES_SETUP)
 
 # Startup file
+# DEVICE_STARTUP  = $(BASE_STARTUP)/startup_common.s
 DEVICE_STARTUP = $(BASE_STARTUP)/$(SERIES_FOLDER)/startup_$(DEVICE).s
 
 
