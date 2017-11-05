@@ -96,20 +96,26 @@ DEVICE_STARTUP = $(BASE_STARTUP)/$(SERIES_FOLDER)/startup_$(DEVICE).s
 # Make all
 all:$(BIN_IMAGE)
 
-$(BIN_IMAGE):$(EXECUTABLE)
+$(BIN_IMAGE): $(EXECUTABLE)
 	$(OBJCOPY) -O binary $^ $@
 
-$(EXECUTABLE):$(SRC) $(STARTUP_OBJ)
+$(EXECUTABLE): $(SRC) $(STARTUP_OBJ) | $(BIN_FOLDER)
 	$(CC) $(CFLAGS) $^ -o $@
 
-$(STARTUP_OBJ): $(DEVICE_STARTUP)
+$(STARTUP_OBJ): $(DEVICE_STARTUP) | $(OBJ_FOLDER)
 	$(CC) $(CFLAGS) $^ -c -o $@
+
+$(BIN_FOLDER):
+	mkdir $(BIN_FOLDER)
+
+$(OBJ_FOLDER):
+	mkdir $(OBJ_FOLDER)
 
 # Make clean
 clean:
-	-rm $(EXECUTABLE)
-	-rm $(BIN_IMAGE)
-	-rm $(STARTUP_OBJ)
+	rm -f $(EXECUTABLE)
+	rm -f $(BIN_IMAGE)
+	rm -f $(STARTUP_OBJ)
 
 # Make flash
 flash:
