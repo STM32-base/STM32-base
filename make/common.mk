@@ -20,6 +20,9 @@ endif
 ifneq (,$(findstring STM32F1, $(DEVICE)))
     include $(BASE_MAKE)/STM32F1xx/common.mk
 endif
+ifneq (,$(findstring STM32F4, $(DEVICE)))
+	include $(BASE_MAKE)/STM32F4xx/common.mk
+endif
 
 # Compiler and other programs
 TARGET ?= arm-none-eabi-
@@ -58,7 +61,7 @@ CFLAGS += -D $(DEVICE_DEF)
 # Flags - Assembler Options
 
 # Flags - Linker Options
-CFLAGS += -Wl,-T,$(BASE_LINKER)/$(SERIES_FOLDER)/$(DEVICE).ld
+CFLAGS += -Wl,-L$(BASE_LINKER),-T$(BASE_LINKER)/$(SERIES_FOLDER)/$(DEVICE).ld
 
 # Flags - Directory Options
 CFLAGS += -I./src
@@ -88,7 +91,6 @@ SRC  = $(SRC_FOLDER)/*.c
 SRC += $(BASE_CMSIS)/$(SERIES_SETUP)
 
 # Startup file
-# DEVICE_STARTUP  = $(BASE_STARTUP)/startup_common.s
 DEVICE_STARTUP = $(BASE_STARTUP)/$(SERIES_FOLDER)/startup_$(DEVICE).s
 
 
