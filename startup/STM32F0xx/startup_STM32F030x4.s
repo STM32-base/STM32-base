@@ -5,18 +5,13 @@
 
 .include "startup_common.s"
 
-/**
- * The minimal vector table for a Cortex-M0. Note that the proper constructs
- * must be placed on this to ensure that it ends up at physical address
- * 0x0000.0000.
- */
 .section .isr_vector, "a", %progbits
 .type vector_table, %object
 .size vector_table, .-vector_table
 vector_table:
 // Pointer to the end of the stack
     .word __end_stack
-// Standard ARM Cortex-M0 interrupt vectors
+// ARM Cortex-M0 interrupt vectors
     .word Reset_Handler
     .word NMI_Handler
     .word HardFault_Handler
@@ -32,7 +27,7 @@ vector_table:
     .word 0
     .word PendSV_Handler
     .word SysTick_Handler
-// Device specific external interrupt vectors
+// Device specific interrupt vectors
     .word WWDG_IRQHandler
     .word 0
     .word RTC_IRQHandler
@@ -66,11 +61,6 @@ vector_table:
     .word 0
     .word 0
 
-/**
- * Provide a weak alias for each exception handler to the Default_Handler. As
- * they are weak aliases, any function with the same name will override this
- * definition.
- */
 .weak NMI_Handler
 .thumb_set NMI_Handler, Default_Handler
 
