@@ -1,0 +1,8 @@
+MEMORY {
+    FLASH   (rx) : ORIGIN = 0x08000000, LENGTH = 1.5M
+    RAM    (rwx) : ORIGIN = 0x20000000, LENGTH = 320K
+
+    CCMRAM (rwx) : ORIGIN = 0x10000000, LENGTH = 0K
+}
+
+INCLUDE common.ld
