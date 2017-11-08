@@ -13,7 +13,6 @@
 .word __bss_start
 .word __bss_end
 
-
 /**
  * This code gets called when the processor starts following a reset event. This
  * code only copies the global variables to RAM and sets the uninitialized
@@ -24,42 +23,42 @@
 .weak Reset_Handler
 .type Reset_Handler, %function
 Reset_Handler:
-    movs r0, #0        // var i = 0
-    ldr  r1, = __data_start  // var startData = 0x...
-    ldr  r2, = __data_end  // var endData = 0x...
-    ldr  r3, = __data_flash_start // var startDataInFlash = 0x...
+    movs r0, #0
+    ldr  r1, = __data_start
+    ldr  r2, = __data_end
+    ldr  r3, = __data_flash_start
     b    LoopCopyDataInit
 
 // Copy over the initialized global variables
 CopyDataInit:
-    ldr  r4, [r3, r0] // var temp = *(startDataInFlash+i)
-    str  r4, [r1, r0] // startData+i = temp
-    adds r0, r0, #4   // i += 4
+    ldr  r4, [r3, r0]
+    str  r4, [r1, r0]
+    adds r0, r0, #4
 
 LoopCopyDataInit:
-    adds r1, r1, r0   // var startoffset = startData + i
-    cmp  r1, r2       // while startoffset < endData
+    adds r1, r1, r0
+    cmp  r1, r2
     bcc  CopyDataInit
 
-    movs r0, #0       // i = 0
-    ldr  r1, = __bss_start  // Start of uninit data in RAM
-    ldr  r2, = __bss_end  // End of uninit data in RAM
+    movs r0, #0
+    ldr  r1, = __bss_start
+    ldr  r2, = __bss_end
     b    LoopFillZerobss
 
 FillZerobss:
-    str  r0, [r1]     // *sbss = i
-    adds r1, r1, #4   // sbss += 4
+    str  r0, [r1]
+    adds r1, r1, #4
 
 LoopFillZerobss:
-    cmp  r1, r2       // while sbss < ebss
+    cmp  r1, r2
     bcc  FillZerobss
 
 .ifdef __ccmdata_start
     movs r0, #0
-    ldr  r1, __ccmdata_start
-    ldr  r2, __ccmdata_end
-    ldr  r3, __ccmdata_flash_start
-    b    LoopCopyCcMData
+    ldr  r1, = __ccmdata_start
+    ldr  r2, = __ccmdata_end
+    ldr  r3, = __ccmdata_flash_start
+    b    LoopCopyCCMData
 
 CopyCCMData:
     ldr  r4, [r3, r0]
@@ -69,7 +68,7 @@ CopyCCMData:
 LoopCopyCCMData:
     adds r1, r1, r0
     cmp  r1, r2
-    bcc  CopyCcMData
+    bcc  CopyCCMData
 .endif
 
     bl SystemInit
