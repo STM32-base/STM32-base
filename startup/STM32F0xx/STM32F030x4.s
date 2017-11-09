@@ -9,9 +9,7 @@
 .type vector_table, %object
 .size vector_table, .-vector_table
 vector_table:
-// Pointer to the end of the stack
     .word __end_stack
-// ARM Cortex-M0 interrupt vectors
     .word Reset_Handler
     .word NMI_Handler
     .word HardFault_Handler
@@ -27,7 +25,6 @@ vector_table:
     .word 0
     .word PendSV_Handler
     .word SysTick_Handler
-// Device specific interrupt vectors
     .word WWDG_IRQHandler
     .word 0
     .word RTC_IRQHandler
