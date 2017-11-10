@@ -3,13 +3,12 @@
 .fpu softvfp
 .thumb
 
-// 0x108: Boot in RAM mode on STM32F1xx Medium Density devices.
-// ldr.w pc, [pc, #-264]
-.equ BootRAM, 0xF108F85F
+// 0x01E0: Boot in RAM mode on STM32F10x XL-Density devices.
+.equ BootRAM, 0xF1E0F85F
 
 .include "startup_common.s"
 
-.section .isr_vector, "a", %progbits
+.section .isr_vector,"a",%progbits
 .type vector_table, %object
 .size vector_table, .-vector_table
 vector_table:
@@ -53,9 +52,9 @@ vector_table:
     .word CAN1_RX1_IRQHandler
     .word CAN1_SCE_IRQHandler
     .word EXTI9_5_IRQHandler
-    .word TIM1_BRK_IRQHandler
-    .word TIM1_UP_IRQHandler
-    .word TIM1_TRG_COM_IRQHandler
+    .word TIM1_BRK_TIM9_IRQHandler
+    .word TIM1_UP_TIM10_IRQHandler
+    .word TIM1_TRG_COM_TIM11_IRQHandler
     .word TIM1_CC_IRQHandler
     .word TIM2_IRQHandler
     .word TIM3_IRQHandler
@@ -72,6 +71,60 @@ vector_table:
     .word EXTI15_10_IRQHandler
     .word RTC_Alarm_IRQHandler
     .word USBWakeUp_IRQHandler
+    .word TIM8_BRK_TIM12_IRQHandler
+    .word TIM8_UP_TIM13_IRQHandler
+    .word TIM8_TRG_COM_TIM14_IRQHandler
+    .word TIM8_CC_IRQHandler
+    .word ADC3_IRQHandler
+    .word FSMC_IRQHandler
+    .word SDIO_IRQHandler
+    .word TIM5_IRQHandler
+    .word SPI3_IRQHandler
+    .word UART4_IRQHandler
+    .word UART5_IRQHandler
+    .word TIM6_IRQHandler
+    .word TIM7_IRQHandler
+    .word DMA2_Channel1_IRQHandler
+    .word DMA2_Channel2_IRQHandler
+    .word DMA2_Channel3_IRQHandler
+    .word DMA2_Channel4_5_IRQHandler
+    .word 0
+    .word 0
+    .word 0
+    .word 0
+    .word 0
+    .word 0
+    .word 0
+    .word 0
+    .word 0
+    .word 0
+    .word 0
+    .word 0
+    .word 0
+    .word 0
+    .word 0
+    .word 0
+    .word 0
+    .word 0
+    .word 0
+    .word 0
+    .word 0
+    .word 0
+    .word 0
+    .word 0
+    .word 0
+    .word 0
+    .word 0
+    .word 0
+    .word 0
+    .word 0
+    .word 0
+    .word 0
+    .word 0
+    .word 0
+    .word 0
+    .word 0
+    .word 0
     .word 0
     .word 0
     .word 0
@@ -180,14 +233,14 @@ vector_table:
 .weak EXTI9_5_IRQHandler
 .thumb_set EXTI9_5_IRQHandler, Default_Handler
 
-.weak TIM1_BRK_IRQHandler
-.thumb_set TIM1_BRK_IRQHandler, Default_Handler
+.weak TIM1_BRK_TIM9_IRQHandler
+.thumb_set TIM1_BRK_TIM9_IRQHandler, Default_Handler
 
-.weak TIM1_UP_IRQHandler
-.thumb_set TIM1_UP_IRQHandler, Default_Handler
+.weak TIM1_UP_TIM10_IRQHandler
+.thumb_set TIM1_UP_TIM10_IRQHandler, Default_Handler
 
-.weak TIM1_TRG_COM_IRQHandler
-.thumb_set TIM1_TRG_COM_IRQHandler, Default_Handler
+.weak TIM1_TRG_COM_TIM11_IRQHandler
+.thumb_set TIM1_TRG_COM_TIM11_IRQHandler, Default_Handler
 
 .weak TIM1_CC_IRQHandler
 .thumb_set TIM1_CC_IRQHandler, Default_Handler
@@ -236,3 +289,54 @@ vector_table:
 
 .weak USBWakeUp_IRQHandler
 .thumb_set USBWakeUp_IRQHandler, Default_Handler
+
+.weak TIM8_BRK_TIM12_IRQHandler
+.thumb_set TIM8_BRK_TIM12_IRQHandler, Default_Handler
+
+.weak TIM8_UP_TIM13_IRQHandler
+.thumb_set TIM8_UP_TIM13_IRQHandler, Default_Handler
+
+.weak TIM8_TRG_COM_TIM14_IRQHandler
+.thumb_set TIM8_TRG_COM_TIM14_IRQHandler, Default_Handler
+
+.weak TIM8_CC_IRQHandler
+.thumb_set TIM8_CC_IRQHandler, Default_Handler
+
+.weak ADC3_IRQHandler
+.thumb_set ADC3_IRQHandler, Default_Handler
+
+.weak FSMC_IRQHandler
+.thumb_set FSMC_IRQHandler, Default_Handler
+
+.weak SDIO_IRQHandler
+.thumb_set SDIO_IRQHandler, Default_Handler
+
+.weak TIM5_IRQHandler
+.thumb_set TIM5_IRQHandler, Default_Handler
+
+.weak SPI3_IRQHandler
+.thumb_set SPI3_IRQHandler, Default_Handler
+
+.weak UART4_IRQHandler
+.thumb_set UART4_IRQHandler, Default_Handler
+
+.weak UART5_IRQHandler
+.thumb_set UART5_IRQHandler, Default_Handler
+
+.weak TIM6_IRQHandler
+.thumb_set TIM6_IRQHandler, Default_Handler
+
+.weak TIM7_IRQHandler
+.thumb_set TIM7_IRQHandler, Default_Handler
+
+.weak DMA2_Channel1_IRQHandler
+.thumb_set DMA2_Channel1_IRQHandler, Default_Handler
+
+.weak DMA2_Channel2_IRQHandler
+.thumb_set DMA2_Channel2_IRQHandler, Default_Handler
+
+.weak DMA2_Channel3_IRQHandler
+.thumb_set DMA2_Channel3_IRQHandler, Default_Handler
+
+.weak DMA2_Channel4_5_IRQHandler
+.thumb_set DMA2_Channel4_5_IRQHandler, Default_Handler

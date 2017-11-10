@@ -3,8 +3,7 @@
 .fpu softvfp
 .thumb
 
-// 0x108: Boot in RAM mode on STM32F1xx Medium Density devices.
-// ldr.w pc, [pc, #-264]
+// 0x0108: Boot in RAM mode on STM32F10x Low Density devices.
 .equ BootRAM, 0xF108F85F
 
 .include "startup_common.s"
@@ -59,16 +58,16 @@ vector_table:
     .word TIM1_CC_IRQHandler
     .word TIM2_IRQHandler
     .word TIM3_IRQHandler
-    .word TIM4_IRQHandler
+    .word 0
     .word I2C1_EV_IRQHandler
     .word I2C1_ER_IRQHandler
-    .word I2C2_EV_IRQHandler
-    .word I2C2_ER_IRQHandler
+    .word 0
+    .word 0
     .word SPI1_IRQHandler
-    .word SPI2_IRQHandler
+    .word 0
     .word USART1_IRQHandler
     .word USART2_IRQHandler
-    .word USART3_IRQHandler
+    .word 0
     .word EXTI15_10_IRQHandler
     .word RTC_Alarm_IRQHandler
     .word USBWakeUp_IRQHandler
@@ -198,35 +197,20 @@ vector_table:
 .weak TIM3_IRQHandler
 .thumb_set TIM3_IRQHandler, Default_Handler
 
-.weak TIM4_IRQHandler
-.thumb_set TIM4_IRQHandler, Default_Handler
-
 .weak I2C1_EV_IRQHandler
 .thumb_set I2C1_EV_IRQHandler, Default_Handler
 
 .weak I2C1_ER_IRQHandler
 .thumb_set I2C1_ER_IRQHandler, Default_Handler
 
-.weak I2C2_EV_IRQHandler
-.thumb_set I2C2_EV_IRQHandler, Default_Handler
-
-.weak I2C2_ER_IRQHandler
-.thumb_set I2C2_ER_IRQHandler, Default_Handler
-
 .weak SPI1_IRQHandler
 .thumb_set SPI1_IRQHandler, Default_Handler
-
-.weak SPI2_IRQHandler
-.thumb_set SPI2_IRQHandler, Default_Handler
 
 .weak USART1_IRQHandler
 .thumb_set USART1_IRQHandler, Default_Handler
 
 .weak USART2_IRQHandler
 .thumb_set USART2_IRQHandler, Default_Handler
-
-.weak USART3_IRQHandler
-.thumb_set USART3_IRQHandler, Default_Handler
 
 .weak EXTI15_10_IRQHandler
 .thumb_set EXTI15_10_IRQHandler, Default_Handler

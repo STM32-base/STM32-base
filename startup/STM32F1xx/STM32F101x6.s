@@ -3,8 +3,7 @@
 .fpu softvfp
 .thumb
 
-// 0x108: Boot in RAM mode on STM32F1xx Medium Density devices.
-// ldr.w pc, [pc, #-264]
+// 0x0108: Boot in RAM mode on STM32F10x Low Density devices.
 .equ BootRAM, 0xF108F85F
 
 .include "startup_common.s"
@@ -47,31 +46,31 @@ vector_table:
     .word DMA1_Channel5_IRQHandler
     .word DMA1_Channel6_IRQHandler
     .word DMA1_Channel7_IRQHandler
-    .word ADC1_2_IRQHandler
-    .word USB_HP_CAN1_TX_IRQHandler
-    .word USB_LP_CAN1_RX0_IRQHandler
-    .word CAN1_RX1_IRQHandler
-    .word CAN1_SCE_IRQHandler
+    .word ADC1_IRQHandler
+    .word 0
+    .word 0
+    .word 0
+    .word 0
     .word EXTI9_5_IRQHandler
-    .word TIM1_BRK_IRQHandler
-    .word TIM1_UP_IRQHandler
-    .word TIM1_TRG_COM_IRQHandler
-    .word TIM1_CC_IRQHandler
+    .word 0
+    .word 0
+    .word 0
+    .word 0
     .word TIM2_IRQHandler
     .word TIM3_IRQHandler
-    .word TIM4_IRQHandler
+    .word 0
     .word I2C1_EV_IRQHandler
     .word I2C1_ER_IRQHandler
-    .word I2C2_EV_IRQHandler
-    .word I2C2_ER_IRQHandler
+    .word 0
+    .word 0
     .word SPI1_IRQHandler
-    .word SPI2_IRQHandler
+    .word 0
     .word USART1_IRQHandler
     .word USART2_IRQHandler
-    .word USART3_IRQHandler
+    .word 0
     .word EXTI15_10_IRQHandler
     .word RTC_Alarm_IRQHandler
-    .word USBWakeUp_IRQHandler
+    .word 0
     .word 0
     .word 0
     .word 0
@@ -162,35 +161,11 @@ vector_table:
 .weak DMA1_Channel7_IRQHandler
 .thumb_set DMA1_Channel7_IRQHandler, Default_Handler
 
-.weak ADC1_2_IRQHandler
-.thumb_set ADC1_2_IRQHandler, Default_Handler
-
-.weak USB_HP_CAN1_TX_IRQHandler
-.thumb_set USB_HP_CAN1_TX_IRQHandler, Default_Handler
-
-.weak USB_LP_CAN1_RX0_IRQHandler
-.thumb_set USB_LP_CAN1_RX0_IRQHandler, Default_Handler
-
-.weak CAN1_RX1_IRQHandler
-.thumb_set CAN1_RX1_IRQHandler, Default_Handler
-
-.weak CAN1_SCE_IRQHandler
-.thumb_set CAN1_SCE_IRQHandler, Default_Handler
+.weak ADC1_IRQHandler
+.thumb_set ADC1_IRQHandler, Default_Handler
 
 .weak EXTI9_5_IRQHandler
 .thumb_set EXTI9_5_IRQHandler, Default_Handler
-
-.weak TIM1_BRK_IRQHandler
-.thumb_set TIM1_BRK_IRQHandler, Default_Handler
-
-.weak TIM1_UP_IRQHandler
-.thumb_set TIM1_UP_IRQHandler, Default_Handler
-
-.weak TIM1_TRG_COM_IRQHandler
-.thumb_set TIM1_TRG_COM_IRQHandler, Default_Handler
-
-.weak TIM1_CC_IRQHandler
-.thumb_set TIM1_CC_IRQHandler, Default_Handler
 
 .weak TIM2_IRQHandler
 .thumb_set TIM2_IRQHandler, Default_Handler
@@ -198,26 +173,14 @@ vector_table:
 .weak TIM3_IRQHandler
 .thumb_set TIM3_IRQHandler, Default_Handler
 
-.weak TIM4_IRQHandler
-.thumb_set TIM4_IRQHandler, Default_Handler
-
 .weak I2C1_EV_IRQHandler
 .thumb_set I2C1_EV_IRQHandler, Default_Handler
 
 .weak I2C1_ER_IRQHandler
 .thumb_set I2C1_ER_IRQHandler, Default_Handler
 
-.weak I2C2_EV_IRQHandler
-.thumb_set I2C2_EV_IRQHandler, Default_Handler
-
-.weak I2C2_ER_IRQHandler
-.thumb_set I2C2_ER_IRQHandler, Default_Handler
-
 .weak SPI1_IRQHandler
 .thumb_set SPI1_IRQHandler, Default_Handler
-
-.weak SPI2_IRQHandler
-.thumb_set SPI2_IRQHandler, Default_Handler
 
 .weak USART1_IRQHandler
 .thumb_set USART1_IRQHandler, Default_Handler
@@ -225,14 +188,8 @@ vector_table:
 .weak USART2_IRQHandler
 .thumb_set USART2_IRQHandler, Default_Handler
 
-.weak USART3_IRQHandler
-.thumb_set USART3_IRQHandler, Default_Handler
-
 .weak EXTI15_10_IRQHandler
 .thumb_set EXTI15_10_IRQHandler, Default_Handler
 
 .weak RTC_Alarm_IRQHandler
 .thumb_set RTC_Alarm_IRQHandler, Default_Handler
-
-.weak USBWakeUp_IRQHandler
-.thumb_set USBWakeUp_IRQHandler, Default_Handler
