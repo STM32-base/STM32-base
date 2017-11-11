@@ -3,16 +3,13 @@
 .fpu softvfp
 .thumb
 
-.word __ccmdata_start
-.word __ccmdata_end
-
 .include "startup_common.s"
 
-.section .isr_vector, "a", %progbits
-.type vector_table, %object
-.size vector_table, .-vector_table
+.section  .isr_vector,"a",%progbits
+.type  vector_table, %object
+.size  vector_table, .-vector_table
 vector_table:
-    .word __end_stack
+    .word _estack
     .word Reset_Handler
     .word NMI_Handler
     .word HardFault_Handler
@@ -76,7 +73,7 @@ vector_table:
     .word TIM8_TRG_COM_TIM14_IRQHandler
     .word TIM8_CC_IRQHandler
     .word DMA1_Stream7_IRQHandler
-    .word FSMC_IRQHandler
+    .word FMC_IRQHandler
     .word SDIO_IRQHandler
     .word TIM5_IRQHandler
     .word SPI3_IRQHandler
@@ -89,8 +86,8 @@ vector_table:
     .word DMA2_Stream2_IRQHandler
     .word DMA2_Stream3_IRQHandler
     .word DMA2_Stream4_IRQHandler
-    .word ETH_IRQHandler
-    .word ETH_WKUP_IRQHandler
+    .word 0
+    .word 0
     .word CAN2_TX_IRQHandler
     .word CAN2_RX0_IRQHandler
     .word CAN2_RX1_IRQHandler
@@ -108,8 +105,23 @@ vector_table:
     .word OTG_HS_IRQHandler
     .word DCMI_IRQHandler
     .word 0
-    .word HASH_RNG_IRQHandler
+    .word 0
     .word FPU_IRQHandler
+    .word 0
+    .word 0
+    .word SPI4_IRQHandler
+    .word 0
+    .word 0
+    .word SAI1_IRQHandler
+    .word 0
+    .word 0
+    .word 0
+    .word SAI2_IRQHandler
+    .word QUADSPI_IRQHandler
+    .word CEC_IRQHandler
+    .word SPDIF_RX_IRQHandler
+    .word FMPI2C1_Event_IRQHandler
+    .word FMPI2C1_Error_IRQHandler
 
 .weak NMI_Handler
 .thumb_set NMI_Handler, Default_Handler
@@ -282,8 +294,8 @@ vector_table:
 .weak DMA1_Stream7_IRQHandler
 .thumb_set DMA1_Stream7_IRQHandler, Default_Handler
 
-.weak FSMC_IRQHandler
-.thumb_set FSMC_IRQHandler, Default_Handler
+.weak FMC_IRQHandler
+.thumb_set FMC_IRQHandler, Default_Handler
 
 .weak SDIO_IRQHandler
 .thumb_set SDIO_IRQHandler, Default_Handler
@@ -320,12 +332,6 @@ vector_table:
 
 .weak DMA2_Stream4_IRQHandler
 .thumb_set DMA2_Stream4_IRQHandler, Default_Handler
-
-.weak ETH_IRQHandler
-.thumb_set ETH_IRQHandler, Default_Handler
-
-.weak ETH_WKUP_IRQHandler
-.thumb_set ETH_WKUP_IRQHandler, Default_Handler
 
 .weak CAN2_TX_IRQHandler
 .thumb_set CAN2_TX_IRQHandler, Default_Handler
@@ -375,8 +381,29 @@ vector_table:
 .weak DCMI_IRQHandler
 .thumb_set DCMI_IRQHandler, Default_Handler
 
-.weak HASH_RNG_IRQHandler
-.thumb_set HASH_RNG_IRQHandler, Default_Handler
-
 .weak FPU_IRQHandler
 .thumb_set FPU_IRQHandler, Default_Handler
+
+.weak SPI4_IRQHandler
+.thumb_set SPI4_IRQHandler, Default_Handler
+
+.weak SAI1_IRQHandler
+.thumb_set SAI1_IRQHandler, Default_Handler
+
+.weak SAI2_IRQHandler
+.thumb_set SAI2_IRQHandler, Default_Handler
+
+.weak QUADSPI_IRQHandler
+.thumb_set QUADSPI_IRQHandler, Default_Handler
+
+.weak CEC_IRQHandler
+.thumb_set CEC_IRQHandler, Default_Handler
+
+.weak SPDIF_RX_IRQHandler
+.thumb_set SPDIF_RX_IRQHandler, Default_Handler
+
+.weak FMPI2C1_Event_IRQHandler
+.thumb_set FMPI2C1_Event_IRQHandler, Default_Handler
+
+.weak FMPI2C1_Error_IRQHandler
+.thumb_set FMPI2C1_Error_IRQHandler, Default_Handler

@@ -89,8 +89,8 @@ vector_table:
     .word DMA2_Stream2_IRQHandler
     .word DMA2_Stream3_IRQHandler
     .word DMA2_Stream4_IRQHandler
-    .word ETH_IRQHandler
-    .word ETH_WKUP_IRQHandler
+    .word 0
+    .word 0
     .word CAN2_TX_IRQHandler
     .word CAN2_RX0_IRQHandler
     .word CAN2_RX1_IRQHandler
@@ -106,7 +106,7 @@ vector_table:
     .word OTG_HS_EP1_IN_IRQHandler
     .word OTG_HS_WKUP_IRQHandler
     .word OTG_HS_IRQHandler
-    .word DCMI_IRQHandler
+    .word 0
     .word 0
     .word HASH_RNG_IRQHandler
     .word FPU_IRQHandler
@@ -321,12 +321,6 @@ vector_table:
 .weak DMA2_Stream4_IRQHandler
 .thumb_set DMA2_Stream4_IRQHandler, Default_Handler
 
-.weak ETH_IRQHandler
-.thumb_set ETH_IRQHandler, Default_Handler
-
-.weak ETH_WKUP_IRQHandler
-.thumb_set ETH_WKUP_IRQHandler, Default_Handler
-
 .weak CAN2_TX_IRQHandler
 .thumb_set CAN2_TX_IRQHandler, Default_Handler
 
@@ -371,9 +365,6 @@ vector_table:
 
 .weak OTG_HS_IRQHandler
 .thumb_set OTG_HS_IRQHandler, Default_Handler
-
-.weak DCMI_IRQHandler
-.thumb_set DCMI_IRQHandler, Default_Handler
 
 .weak HASH_RNG_IRQHandler
 .thumb_set HASH_RNG_IRQHandler, Default_Handler

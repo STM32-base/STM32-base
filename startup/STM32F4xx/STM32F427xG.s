@@ -3,16 +3,13 @@
 .fpu softvfp
 .thumb
 
-.word __ccmdata_start
-.word __ccmdata_end
-
 .include "startup_common.s"
 
 .section .isr_vector, "a", %progbits
 .type vector_table, %object
 .size vector_table, .-vector_table
 vector_table:
-    .word __end_stack
+    .word _estack
     .word Reset_Handler
     .word NMI_Handler
     .word HardFault_Handler
@@ -76,7 +73,7 @@ vector_table:
     .word TIM8_TRG_COM_TIM14_IRQHandler
     .word TIM8_CC_IRQHandler
     .word DMA1_Stream7_IRQHandler
-    .word FSMC_IRQHandler
+    .word FMC_IRQHandler
     .word SDIO_IRQHandler
     .word TIM5_IRQHandler
     .word SPI3_IRQHandler
@@ -110,6 +107,15 @@ vector_table:
     .word 0
     .word HASH_RNG_IRQHandler
     .word FPU_IRQHandler
+    .word UART7_IRQHandler
+    .word UART8_IRQHandler
+    .word SPI4_IRQHandler
+    .word SPI5_IRQHandler
+    .word SPI6_IRQHandler
+    .word SAI1_IRQHandler
+    .word 0
+    .word 0
+    .word DMA2D_IRQHandler
 
 .weak NMI_Handler
 .thumb_set NMI_Handler, Default_Handler
@@ -282,8 +288,8 @@ vector_table:
 .weak DMA1_Stream7_IRQHandler
 .thumb_set DMA1_Stream7_IRQHandler, Default_Handler
 
-.weak FSMC_IRQHandler
-.thumb_set FSMC_IRQHandler, Default_Handler
+.weak FMC_IRQHandler
+.thumb_set FMC_IRQHandler, Default_Handler
 
 .weak SDIO_IRQHandler
 .thumb_set SDIO_IRQHandler, Default_Handler
@@ -380,3 +386,24 @@ vector_table:
 
 .weak FPU_IRQHandler
 .thumb_set FPU_IRQHandler, Default_Handler
+
+.weak UART7_IRQHandler
+.thumb_set UART7_IRQHandler, Default_Handler
+
+.weak UART8_IRQHandler
+.thumb_set UART8_IRQHandler, Default_Handler
+
+.weak SPI4_IRQHandler
+.thumb_set SPI4_IRQHandler, Default_Handler
+
+.weak SPI5_IRQHandler
+.thumb_set SPI5_IRQHandler, Default_Handler
+
+.weak SPI6_IRQHandler
+.thumb_set SPI6_IRQHandler, Default_Handler
+
+.weak SAI1_IRQHandler
+.thumb_set SAI1_IRQHandler, Default_Handler
+
+.weak DMA2D_IRQHandler
+.thumb_set DMA2D_IRQHandler, Default_Handler

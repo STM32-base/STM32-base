@@ -3,16 +3,13 @@
 .fpu softvfp
 .thumb
 
-.word __ccmdata_start
-.word __ccmdata_end
-
 .include "startup_common.s"
 
 .section .isr_vector, "a", %progbits
 .type vector_table, %object
 .size vector_table, .-vector_table
 vector_table:
-    .word __end_stack
+    .word _estack
     .word Reset_Handler
     .word NMI_Handler
     .word HardFault_Handler
@@ -107,7 +104,7 @@ vector_table:
     .word OTG_HS_WKUP_IRQHandler
     .word OTG_HS_IRQHandler
     .word DCMI_IRQHandler
-    .word 0
+    .word CRYP_IRQHandler
     .word HASH_RNG_IRQHandler
     .word FPU_IRQHandler
 
@@ -374,6 +371,9 @@ vector_table:
 
 .weak DCMI_IRQHandler
 .thumb_set DCMI_IRQHandler, Default_Handler
+
+.weak CRYP_IRQHandler
+.thumb_set CRYP_IRQHandler, Default_Handler
 
 .weak HASH_RNG_IRQHandler
 .thumb_set HASH_RNG_IRQHandler, Default_Handler
