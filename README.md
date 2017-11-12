@@ -1,6 +1,6 @@
-# Bare metal STM32
+# STM32 Base project
 
-NOTE: This project is work in progress! Anything can (and probably will) change!
+NOTE: This project is work in progress! Anything can (and probably will) change! Do not use the code found in this project for any critical system(s). The use of this code is at your own risk!
 
 The purpose of this repository is to provide a simple and easy to understand starting point for working with STM32 devices using an open-source toolchain. Most other projects consider the makefile, startup code and linker script as being black boxes and do not bother to explain what these files are and how they work.
 
