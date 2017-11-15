@@ -8,6 +8,38 @@ ifeq (STM32F030x4,$(DEVICE))
     DEVICE_DEF = STM32F030x6
 endif
 
+ifeq (STM32F031x4, $(DEVICE))
+    DEVICE_DEF = STM32F031x6
+endif
+
+ifeq (STM32F042x4, $(DEVICE))
+    DEVICE_DEF = STM32F042x4
+endif
+
+ifeq (STM32F051x4, $(DEVICE))
+    DEVICE_DEF = STM32F051x8
+endif
+
+ifeq (STM32F051x6, $(DEVICE))
+    DEVICE_DEF = STM32F051x8
+endif
+
+ifeq (STM32F070x6, $(DEVICE))
+    DEVICE_DEF = STM32F070xB
+endif
+
+ifeq (STM32F071x8, $(DEVICE))
+    DEVICE_DEF = STM32F071xB
+endif
+
+ifeq (STM32F072x8, $(DEVICE))
+    DEVICE_DEF = STM32F072xB
+endif
+
+ifeq (STM32F091xB, $(DEVICE))
+    DEVICE_DEF = STM32F091xC
+endif
+
 ifndef DEVICE_DEF
     DEVICE_DEF = $(DEVICE)
 endif
