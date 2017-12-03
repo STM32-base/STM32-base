@@ -95,13 +95,23 @@ I've added comments to most of the files. To provide a more high-level and compr
 
 This is a table of devices I've tested with the code in this repository. I will add more devices as I acquire more different devices to test with. Please let me know if you can confirm a device not present in the table below works!
 
-| Device        | Support? | Tested? | Tester |
-| ------------- | :------: | :-----: | ------ |
-| STM32F030F4P6 | Yes      | Yes     | Me     |
-| STM32F103C8T6 | Yes      | Yes     | Me     |
-| STM32F407VET6 | Yes      | Yes     | Me     |
+| Device        | Support? | Tested? |
+| ------------- | :------: | :-----: |
+| STM32F030F4P6 | Yes      | Yes     |
+| STM32F051C8T6 | Yes      | Yes     |
+| STM32F103C8T6 | Yes      | Yes     |
+| STM32F103RET6 | Probably | Not yet |
+| STM32F103RBT6 | Probably | Not yet |
+| STM32F103RCT6 | Probably | Not yet |
+| STM32F103VCT6 | Probably | Not yet |
+| STM32F103VET6 | Probably | Not yet |
+| STM32F103ZET6 | Yes      | Yes     |
+| STM32F407VET6 | Yes      | Yes     |
+| STM32F407ZGT6 | Probably | Not yet |
 
 ## Boards
+
+The boards overview will soon be moved to [my website](https://thomas-gravekamp.nl/).
 
 This is a table of boards, both official and clones. As this is a low-level oriented libaray, boards containing the devices listed above will be supported. This is just a small overview of the boards I currently own and have tested with. Most of the Chinese clones can be bought via AliExpress or Ebay.
 
