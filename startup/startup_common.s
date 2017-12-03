@@ -36,8 +36,8 @@ CopyDataInit:
     adds r0, r0, #4
 
 LoopCopyDataInit:
-    adds r1, r1, r0
-    cmp  r1, r2
+    adds r4, r1, r0
+    cmp  r4, r2
     bcc  CopyDataInit
 
     movs r0, #0
@@ -66,8 +66,8 @@ CopyCCMData:
     adds r0, r0, #4
 
 LoopCopyCCMData:
-    adds r1, r1, r0
-    cmp  r1, r2
+    adds r4, r1, r0
+    cmp  r4, r2
     bcc  CopyCCMData
 .endif
 
