@@ -3,7 +3,7 @@
 .fpu softvfp
 .thumb
 
-
+.include "startup_common.s"
 
 .section .isr_vector, "a", %progbits
 .type vector_table, %object

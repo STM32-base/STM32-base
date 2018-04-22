@@ -6,10 +6,10 @@
 .include "startup_common.s"
 
 .section .isr_vector, "a", %progbits
-.type g_pfnVectors, %object
-.size g_pfnVectors, .-g_pfnVectors
-g_pfnVectors:
-    .word _estack
+.type vector_table, %object
+.size vector_table, .-vector_table
+vector_table:
+    .word __end_stack
     .word Reset_Handler
     .word NMI_Handler
     .word HardFault_Handler

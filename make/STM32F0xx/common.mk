@@ -4,7 +4,7 @@ export
 # The peripheral abstraction layer considers the x4 and x6 devices to be the
 # same (which they are, except for memory) but that doesn't work nice with the
 # DEVICE variable set on project level.
-ifeq (STM32F030x4,$(DEVICE))
+ifeq (STM32F030x4, $(DEVICE))
     DEVICE_DEF = STM32F030x6
 endif
 
@@ -46,5 +46,5 @@ endif
 
 SERIES_CPU = cortex-m0
 
-SERIES_FOLDER  = STM32F0xx
-SERIES_SETUP   = Device/ST/STM32F0xx/Source/Templates/system_stm32f0xx.c
+SERIES_FOLDER = STM32F0xx
+SERIES_SETUP  = Device/ST/STM32F0xx/Source/Templates/system_stm32f0xx.c

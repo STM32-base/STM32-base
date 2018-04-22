@@ -9,7 +9,7 @@
 .type vector_table, %object
 .size vector_table, .-vector_table
 vector_table:
-    .word _estack
+    .word __end_stack
     .word Reset_Handler
     .word NMI_Handler
     .word HardFault_Handler
