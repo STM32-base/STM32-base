@@ -1,50 +1,61 @@
 export
 
-# Ugly hack to pass the value to the peripheral abstraction layer
-# The peripheral abstraction layer considers the x4 and x6 devices to be the
-# same (which they are, except for memory) but that doesn't work nice with the
-# DEVICE variable set on project level.
+SERIES_CPU = cortex-m0
+SERIES_FOLDER = STM32F0xx
+
 ifeq (STM32F030x4, $(DEVICE))
-    DEVICE_DEF = STM32F030x6
+    MAPPED_DEVICE = STM32F030x6
 endif
 
 ifeq (STM32F031x4, $(DEVICE))
-    DEVICE_DEF = STM32F031x6
+    MAPPED_DEVICE = STM32F031x6
+endif
+
+ifeq (STM32F038x6, $(DEVICE))
+    MAPPED_DEVICE = STM32F038xx
 endif
 
 ifeq (STM32F042x4, $(DEVICE))
-    DEVICE_DEF = STM32F042x4
+    MAPPED_DEVICE = STM32F042x6
+endif
+
+ifeq (STM32F048x6, $(DEVICE))
+    MAPPED_DEVICE = STM32F048xx
 endif
 
 ifeq (STM32F051x4, $(DEVICE))
-    DEVICE_DEF = STM32F051x8
+    MAPPED_DEVICE = STM32F051x8
 endif
 
 ifeq (STM32F051x6, $(DEVICE))
-    DEVICE_DEF = STM32F051x8
+    MAPPED_DEVICE = STM32F051x8
 endif
 
-ifeq (STM32F070x6, $(DEVICE))
-    DEVICE_DEF = STM32F070xB
+ifeq (STM32F058x8, $(DEVICE))
+    MAPPED_DEVICE = STM32F058xx
 endif
 
 ifeq (STM32F071x8, $(DEVICE))
-    DEVICE_DEF = STM32F071xB
+    MAPPED_DEVICE = STM32F071xB
 endif
 
 ifeq (STM32F072x8, $(DEVICE))
-    DEVICE_DEF = STM32F072xB
+    MAPPED_DEVICE = STM32F072xB
+endif
+
+ifeq (STM32F078xB, $(DEVICE))
+    MAPPED_DEVICE = STM32F078xx
 endif
 
 ifeq (STM32F091xB, $(DEVICE))
-    DEVICE_DEF = STM32F091xC
+    MAPPED_DEVICE = STM32F091xC
 endif
 
-ifndef DEVICE_DEF
-    DEVICE_DEF = $(DEVICE)
+ifeq (STM32F098xC, $(DEVICE))
+    MAPPED_DEVICE = STM32F098xx
 endif
 
-SERIES_CPU = cortex-m0
 
-SERIES_FOLDER = STM32F0xx
-SERIES_SETUP  = Device/ST/STM32F0xx/Source/Templates/system_stm32f0xx.c
+ifndef MAPPED_DEVICE
+    MAPPED_DEVICE = $(DEVICE)
+endif

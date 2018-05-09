@@ -25,6 +25,7 @@ vector_table:
     .word 0
     .word PendSV_Handler
     .word SysTick_Handler
+
     .word WWDG_IRQHandler
     .word PVD_IRQHandler
     .word TAMP_STAMP_IRQHandler
@@ -111,6 +112,7 @@ vector_table:
     .word 0
     .word SPI4_IRQHandler
     .word SPI5_IRQHandler
+
 
 .weak NMI_Handler
 .thumb_set NMI_Handler, Default_Handler

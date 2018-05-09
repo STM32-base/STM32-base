@@ -4,7 +4,7 @@
 .thumb
 
 // 0x0108: Boot in RAM mode on STM32F10x Low Density devices.
-.equ  BootRAM, 0xF108F85F
+.equ BootRAM, 0xF108F85F
 
 .include "startup_common.s"
 

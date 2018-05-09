@@ -1,0 +1,61 @@
+export
+
+SERIES_CPU = cortex-m3
+SERIES_FOLDER = STM32F2xx
+
+ifeq (STM32F205xB, $(DEVICE))
+    MAPPED_DEVICE = STM32F205xx
+endif
+
+ifeq (STM32F205xC, $(DEVICE))
+    MAPPED_DEVICE = STM32F205xx
+endif
+
+ifeq (STM32F205xE, $(DEVICE))
+    MAPPED_DEVICE = STM32F205xx
+endif
+
+ifeq (STM32F205xF, $(DEVICE))
+    MAPPED_DEVICE = STM32F205xx
+endif
+
+ifeq (STM32F205xG, $(DEVICE))
+    MAPPED_DEVICE = STM32F205xx
+endif
+
+ifeq (STM32F207xC, $(DEVICE))
+    MAPPED_DEVICE = STM32F207xx
+endif
+
+ifeq (STM32F207xE, $(DEVICE))
+    MAPPED_DEVICE = STM32F207xx
+endif
+
+ifeq (STM32F207xF, $(DEVICE))
+    MAPPED_DEVICE = STM32F207xx
+endif
+
+ifeq (STM32F207xG, $(DEVICE))
+    MAPPED_DEVICE = STM32F207xx
+endif
+
+ifeq (STM32F215xE, $(DEVICE))
+    MAPPED_DEVICE = STM32F215xx
+endif
+
+ifeq (STM32F215xG, $(DEVICE))
+    MAPPED_DEVICE = STM32F215xx
+endif
+
+ifeq (STM32F217xE, $(DEVICE))
+    MAPPED_DEVICE = STM32F217xx
+endif
+
+ifeq (STM32F217xG, $(DEVICE))
+    MAPPED_DEVICE = STM32F217xx
+endif
+
+
+ifndef MAPPED_DEVICE
+    MAPPED_DEVICE = $(DEVICE)
+endif
