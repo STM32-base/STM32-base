@@ -53,10 +53,11 @@ OBJCOPY = $(TOOLCHAIN_PATH)$(TOOLCHAIN_SEPARATOR)$(TARGET)objcopy
 OBJDUMP = $(TOOLCHAIN_PATH)$(TOOLCHAIN_SEPARATOR)$(TARGET)objdump
 SIZE    = $(TOOLCHAIN_PATH)$(TOOLCHAIN_SEPARATOR)$(TARGET)size
 
-
+# Default for flags
+CFLAGS ?=
 
 # Flags - Overall Options
-CFLAGS ?= -specs=nosys.specs
+CFLAGS += -specs=nosys.specs
 
 # Flags - C Language Options
 CFLAGS += -ffreestanding
