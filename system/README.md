@@ -18,7 +18,7 @@ The ARM folder contains the ARM CMSIS files. These files provide access to the A
 
 ## Device specific folders
 
-The defice specific folders contain two subfolders, namely the `src` and `include` folders. The include folder contains device-specific header files defining the devices and registers found on a particular range of devices. To figure out which header file is included for your device, see the [device name mapping wiki page](https://github.com/ThomasGravekamp/STM32-base/wiki/Device-name-mapping).
+The defice specific folders contain two subfolders, namely the `src` and `include` folders. The include folder contains device-specific header files defining the devices and registers found on a particular range of devices. To figure out which header file is included for your device, see the [device name mapping wiki page](https://github.com/STM32-base/STM32-base/wiki/Device-name-mapping).
 
 ## Peripheral definition
 

@@ -111,5 +111,5 @@ This variable contains the folder name for this series of devices. It contains a
 
 ### MAPPED_DEVICE
 
-This variable contains the name of the mapped device name. This name is used to include the right startup, linker and system files. For a complete overview of the device name mapping, see its [wiki page](https://github.com/ThomasGravekamp/STM32-base/wiki/Device-name-mapping).
+This variable contains the name of the mapped device name. This name is used to include the right startup, linker and system files. For a complete overview of the device name mapping, see its [wiki page](https://github.com/STM32-base/STM32-base/wiki/Device-name-mapping).
 
