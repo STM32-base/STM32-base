@@ -1,7 +1,12 @@
 #ifndef COMMON_H
 #define COMMON_H
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 extern void SystemInit (void);
+extern void __main (void);
 
 typedef enum {
   RESET = 0U,
@@ -29,5 +34,9 @@ typedef enum {
 #define MODIFY_REG(REG, CLEARMASK, SETMASK)  WRITE_REG((REG), (((READ_REG(REG)) & (~(CLEARMASK))) | (SETMASK)))
 
 #define POSITION_VAL(VAL)     (__CLZ(__RBIT(VAL)))
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif

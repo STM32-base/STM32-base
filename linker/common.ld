@@ -108,6 +108,15 @@ SECTIONS {
         __ccmdata_end = .;
     } > CCMRAM AT> FLASH
 
+    ._user_heap_stack : {
+        . = ALIGN(4);
+        PROVIDE ( end = . );
+        PROVIDE ( _end = . );
+        . = . + 0x200;
+        . = . + 0x400;
+        . = ALIGN(4);
+    } > RAM
+
     /DISCARD/ : {
         libc.a(*)
         libm.a(*)

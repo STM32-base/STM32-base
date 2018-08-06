@@ -31,8 +31,6 @@ else
 	$(error Please set a valid DEVICE name.)
 endif
 
-
-
 # Compiler and other programs
 TARGET = arm-none-eabi-
 
@@ -61,9 +59,13 @@ CFLAGS += -specs=nosys.specs
 
 # Flags - C Language Options
 CFLAGS += -ffreestanding
-CFLAGS += -std=c11
+# CFLAGS += -std=c11
 
 # Flags - C++ Language Options
+CFLAGS += -fno-threadsafe-statics
+CFLAGS += -fno-rtti
+CFLAGS += -fno-exceptions
+CFLAGS += -fno-unwind-tables
 
 # Flags - Warning Options
 CFLAGS += -Wall
@@ -73,6 +75,8 @@ CFLAGS += -Wextra
 CFLAGS += -g
 
 # Flags - Optimization Options
+CFLAGS += -ffunction-sections
+CFLAGS += -fdata-sections
 
 # Flags - Preprocessor options
 CFLAGS += -D USE_STDPERIPH_DRIVER
@@ -81,6 +85,7 @@ CFLAGS += -D $(MAPPED_DEVICE)
 # Flags - Assembler Options
 
 # Flags - Linker Options
+CFLAGS += -nostdlib
 CFLAGS += -Wl,-L$(BASE_LINKER),-T$(BASE_LINKER)/$(SERIES_FOLDER)/$(DEVICE).ld
 
 # Flags - Directory Options
@@ -97,8 +102,6 @@ endif
 CFLAGS += -mcpu=$(SERIES_CPU)
 CFLAGS += -mlittle-endian
 CFLAGS += -mthumb
-
-
 
 # Project folder names
 BIN_FOLDER ?= ./bin
@@ -121,8 +124,6 @@ SRC += $(SRC_FOLDER)/*.c
 # Startup file
 DEVICE_STARTUP = $(BASE_STARTUP)/$(SERIES_FOLDER)/$(MAPPED_DEVICE).s
 
-
-
 # Make all
 all:$(BIN_FILE_PATH)
 
@@ -130,10 +131,10 @@ $(BIN_FILE_PATH): $(ELF_FILE_PATH)
 	$(OBJCOPY) -O binary $^ $@
 
 $(ELF_FILE_PATH): $(SRC) $(OBJ_FILE_PATH) | $(BIN_FOLDER)
-	$(CC) $(CFLAGS) $^ -o $@
+	$(CXX) $(CFLAGS) $^ -o $@
 
 $(OBJ_FILE_PATH): $(DEVICE_STARTUP) | $(OBJ_FOLDER)
-	$(CC) $(CFLAGS) $^ -c -o $@
+	$(CXX) $(CFLAGS) $^ -c -o $@
 
 $(BIN_FOLDER):
 	mkdir $(BIN_FOLDER)

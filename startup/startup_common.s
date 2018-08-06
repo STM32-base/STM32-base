@@ -74,7 +74,7 @@ LoopFillZerobss:
     bcc  FillZerobss
 
     bl SystemInit
-    bl __libc_init_array
+    bl __main
     bl main
 
 .size Reset_Handler, .-Reset_Handler
