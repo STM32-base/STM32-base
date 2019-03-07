@@ -14,10 +14,9 @@
 .word __bss_end
 
 /**
- * This code gets called when the processor starts following a reset event. This
+ * This code is called when the processor starts following a reset event. This
  * code only copies the global variables to RAM and sets the uninitialized
- * variables to 0. After that it calls the SystemInit and the __libc_init_array
- * functions before it finally calls the supplied main routine.
+ * variables to 0.
  */
 .section .text.Reset_Handler
 .weak Reset_Handler
@@ -73,9 +72,16 @@ LoopFillZerobss:
     cmp  r1, r2
     bcc  FillZerobss
 
-    bl SystemInit
-    bl __main
-    bl main
+// Call the system init function
+.ifdef CALL_ARM_SYSTEM_INIT
+    bl   SystemInit
+.endif
+
+// Call the libc init function
+    bl   __libc_init_array
+
+// Call the main function
+    bl   main
 
 .size Reset_Handler, .-Reset_Handler
 
