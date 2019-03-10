@@ -1,12 +1,4 @@
-# Paths to (linked) folders
-STM32_BASE   ?= ./STM32-base
-STM32_CUBE   ?= ./STM32-base-STM32Cube
-
-BASE_LINKER   = $(STM32_BASE)/linker
-BASE_MAKE     = $(STM32_BASE)/make
-BASE_STARTUP  = $(STM32_BASE)/startup
-
-# Check if required variables are set
+# Check to make sure that the required variables are set
 ifndef DEVICE
 	$(error Please set the required DEVICE variable in your makefile.)
 endif
@@ -15,7 +7,22 @@ ifndef FLASH
 	$(error Please set the required FLASH variable in your makefile.)
 endif
 
-# Include series specific make file
+# Standard values for (linked) STM32-base folders
+STM32_BASE_PATH   ?= ./STM32-base
+STM32_CUBE_PATH   ?= ./STM32-base-STM32Cube
+
+# STM32-base sub-folders
+BASE_LINKER   = $(STM32_BASE_PATH)/linker
+BASE_MAKE     = $(STM32_BASE_PATH)/make
+BASE_STARTUP  = $(STM32_BASE_PATH)/startup
+
+# Standard values for project folders
+BIN_FOLDER ?= ./bin
+OBJ_FOLDER ?= ./obj
+SRC_FOLDER ?= ./src
+INC_FOLDER ?= ./inc
+
+# Include the series-specific makefile
 ifneq (,$(findstring STM32F0, $(DEVICE)))
 	include $(BASE_MAKE)/STM32F0xx/common.mk
 else ifneq (,$(findstring STM32F1, $(DEVICE)))
@@ -32,7 +39,7 @@ else
 	$(error Please set a valid DEVICE name.)
 endif
 
-# Toolchain path, defaults to the globally installed toolchain
+# The toolchain path, defaults to using the globally installed toolchain
 ifdef TOOLCHAIN_PATH
 	TOOLCHAIN_SEPARATOR = /
 endif
@@ -50,54 +57,49 @@ OBJDUMP = $(TOOLCHAIN_PATH)$(TOOLCHAIN_SEPARATOR)arm-none-eabi-objdump
 SIZE    = $(TOOLCHAIN_PATH)$(TOOLCHAIN_SEPARATOR)arm-none-eabi-size
 
 # Default for flags
-CFLAGS ?=
+GCC_FLAGS ?=
 
 # Flags - Overall Options
-CFLAGS += -specs=nosys.specs
+GCC_FLAGS += -specs=nosys.specs
 
 # Flags - C Language Options
-CFLAGS += -ffreestanding
-# CFLAGS += -std=c11
+GCC_FLAGS += -ffreestanding
+# GCC_FLAGS += -std=c11
 
 # Flags - C++ Language Options
-CFLAGS += -fno-threadsafe-statics
-CFLAGS += -fno-rtti
-CFLAGS += -fno-exceptions
-CFLAGS += -fno-unwind-tables
+GCC_FLAGS += -fno-threadsafe-statics
+GCC_FLAGS += -fno-rtti
+GCC_FLAGS += -fno-exceptions
+GCC_FLAGS += -fno-unwind-tables
 
 # Flags - Warning Options
-CFLAGS += -Wall
-CFLAGS += -Wextra
+GCC_FLAGS += -Wall
+GCC_FLAGS += -Wextra
 
 # Flags - Debugging Options
-CFLAGS += -g
+GCC_FLAGS += -g
 
 # Flags - Optimization Options
-CFLAGS += -ffunction-sections
-CFLAGS += -fdata-sections
+GCC_FLAGS += -ffunction-sections
+GCC_FLAGS += -fdata-sections
 
 # Flags - Preprocessor options
-CFLAGS += -D $(MAPPED_DEVICE)
+GCC_FLAGS += -D $(MAPPED_DEVICE)
 
 # Flags - Assembler Options
 
 # Flags - Linker Options
-# CFLAGS += -nostdlib
-CFLAGS += -Wl,-L$(BASE_LINKER),-T$(BASE_LINKER)/$(SERIES_FOLDER)/$(DEVICE).ld
+# GCC_FLAGS += -nostdlib
+GCC_FLAGS += -Wl,-L$(BASE_LINKER),-T$(BASE_LINKER)/$(SERIES_FOLDER)/$(DEVICE).ld
 
 # Flags - Directory Options
-CFLAGS += -I./inc
-CFLAGS += -I$(BASE_STARTUP)
+GCC_FLAGS += -I./inc
+GCC_FLAGS += -I$(BASE_STARTUP)
 
 # Flags - Machine-dependant options
-CFLAGS += -mcpu=$(SERIES_CPU)
-CFLAGS += -mlittle-endian
-CFLAGS += -mthumb
-
-# Project folder names
-BIN_FOLDER ?= ./bin
-OBJ_FOLDER ?= ./obj
-SRC_FOLDER ?= ./src
+GCC_FLAGS += -mcpu=$(SERIES_CPU)
+GCC_FLAGS += -mlittle-endian
+GCC_FLAGS += -mthumb
 
 # Output files
 ELF_FILE_NAME ?= stm32_executable.elf
@@ -117,19 +119,19 @@ DEVICE_STARTUP = $(BASE_STARTUP)/$(SERIES_FOLDER)/$(MAPPED_DEVICE).s
 
 # Include the CMSIS files, using the HAL implies using the CMSIS
 ifneq (,$(or USE_ST_CMSIS, USE_ST_HAL))
-CFLAGS += -D CALL_ARM_SYSTEM_INIT
-CFLAGS += -I$(STM32_CUBE)/CMSIS/ARM/inc
-CFLAGS += -I$(STM32_CUBE)/CMSIS/$(SERIES_FOLDER)/inc
+GCC_FLAGS += -D CALL_ARM_SYSTEM_INIT
+GCC_FLAGS += -I$(STM32_CUBE_PATH)/CMSIS/ARM/inc
+GCC_FLAGS += -I$(STM32_CUBE_PATH)/CMSIS/$(SERIES_FOLDER)/inc
 
-SRC += $(STM32_CUBE)/CMSIS/$(SERIES_FOLDER)/src/*.c
+SRC += $(STM32_CUBE_PATH)/CMSIS/$(SERIES_FOLDER)/src/*.c
 endif
 
 # Include the HAL files
 ifdef USE_ST_HAL
-CFLAGS += -D USE_HAL_DRIVER
-CFLAGS += -I$(STM32_CUBE)/HAL/$(SERIES_FOLDER)/inc
+GCC_FLAGS += -D USE_HAL_DRIVER
+GCC_FLAGS += -I$(STM32_CUBE_PATH)/HAL/$(SERIES_FOLDER)/inc
 
-SRC += $(STM32_CUBE)/HAL/$(SERIES_FOLDER)/src/*.c
+SRC += $(STM32_CUBE_PATH)/HAL/$(SERIES_FOLDER)/src/*.c
 endif
 
 # Make all
@@ -139,10 +141,10 @@ $(BIN_FILE_PATH): $(ELF_FILE_PATH)
 	$(OBJCOPY) -O binary $^ $@
 
 $(ELF_FILE_PATH): $(SRC) $(OBJ_FILE_PATH) | $(BIN_FOLDER)
-	$(CXX) $(CFLAGS) $^ -o $@
+	$(CXX) $(GCC_FLAGS) $^ -o $@
 
 $(OBJ_FILE_PATH): $(DEVICE_STARTUP) | $(OBJ_FOLDER)
-	$(CXX) $(CFLAGS) $^ -c -o $@
+	$(CXX) $(GCC_FLAGS) $^ -c -o $@
 
 $(BIN_FOLDER):
 	mkdir $(BIN_FOLDER)
