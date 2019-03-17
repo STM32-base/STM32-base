@@ -1,7 +1,7 @@
 export
 
-SERIES_CPU = cortex-m4
-SERIES_FOLDER = STM32F4xx
+SERIES_CPU  = cortex-m4
+SERIES_ARCH = armv7e-m+fp
 
 ifeq (STM32F401xB, $(DEVICE))
     MAPPED_DEVICE = STM32F401xC
@@ -105,9 +105,4 @@ endif
 
 ifeq (STM32F479xG, $(DEVICE))
     MAPPED_DEVICE = STM32F479xI
-endif
-
-
-ifndef MAPPED_DEVICE
-    MAPPED_DEVICE = $(DEVICE)
 endif

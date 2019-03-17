@@ -1,10 +1,10 @@
 # Check to make sure that the required variables are set
 ifndef DEVICE
-	$(error Please set the required DEVICE variable in your makefile.)
+    $(error Please set the required DEVICE variable in your makefile.)
 endif
 
 ifndef FLASH
-	$(error Please set the required FLASH variable in your makefile.)
+    $(error Please set the required FLASH variable in your makefile.)
 endif
 
 # Standard values for (linked) STM32-base folders
@@ -22,29 +22,19 @@ OBJ_FOLDER ?= ./obj
 SRC_FOLDER ?= ./src
 INC_FOLDER ?= ./inc
 
+# Determine the series folder name
+include $(BASE_MAKE)/series-folder-name.mk
+
 # Include the series-specific makefile
-ifneq (,$(findstring STM32F0, $(DEVICE)))
-	include $(BASE_MAKE)/STM32F0xx/common.mk
-else ifneq (,$(findstring STM32F1, $(DEVICE)))
-	include $(BASE_MAKE)/STM32F1xx/common.mk
-else ifneq (,$(findstring STM32F2, $(DEVICE)))
-	include $(BASE_MAKE)/STM32F2xx/common.mk
-else ifneq (,$(findstring STM32F3, $(DEVICE)))
-	include $(BASE_MAKE)/STM32F3xx/common.mk
-else ifneq (,$(findstring STM32F4, $(DEVICE)))
-	include $(BASE_MAKE)/STM32F4xx/common.mk
-else ifneq (,$(findstring STM32F7, $(DEVICE)))
-	include $(BASE_MAKE)/STM32F7xx/common.mk
-else
-	$(error Please set a valid DEVICE name.)
-endif
+include $(BASE_MAKE)/$(SERIES_FOLDER)/common.mk
+MAPPED_DEVICE ?= $(DEVICE)
 
 # The toolchain path, defaults to using the globally installed toolchain
 ifdef TOOLCHAIN_PATH
-	TOOLCHAIN_SEPARATOR = /
+    TOOLCHAIN_SEPARATOR = /
 endif
 
-TOOLCHAIN_PATH      ?=
+TOOLCHAIN_PATH      ?= ../../tools/bin/
 TOOLCHAIN_SEPARATOR ?=
 
 CC      = $(TOOLCHAIN_PATH)$(TOOLCHAIN_SEPARATOR)arm-none-eabi-gcc
@@ -98,8 +88,10 @@ GCC_FLAGS += -I$(BASE_STARTUP)
 
 # Flags - Machine-dependant options
 GCC_FLAGS += -mcpu=$(SERIES_CPU)
+GCC_FLAGS += -march=$(SERIES_ARCH)
 GCC_FLAGS += -mlittle-endian
 GCC_FLAGS += -mthumb
+GCC_FLAGS += -masm-syntax-unified
 
 # Output files
 ELF_FILE_NAME ?= stm32_executable.elf
@@ -119,19 +111,19 @@ DEVICE_STARTUP = $(BASE_STARTUP)/$(SERIES_FOLDER)/$(MAPPED_DEVICE).s
 
 # Include the CMSIS files, using the HAL implies using the CMSIS
 ifneq (,$(or USE_ST_CMSIS, USE_ST_HAL))
-GCC_FLAGS += -D CALL_ARM_SYSTEM_INIT
-GCC_FLAGS += -I$(STM32_CUBE_PATH)/CMSIS/ARM/inc
-GCC_FLAGS += -I$(STM32_CUBE_PATH)/CMSIS/$(SERIES_FOLDER)/inc
+    GCC_FLAGS += -D CALL_ARM_SYSTEM_INIT
+    GCC_FLAGS += -I$(STM32_CUBE_PATH)/CMSIS/ARM/inc
+    GCC_FLAGS += -I$(STM32_CUBE_PATH)/CMSIS/$(SERIES_FOLDER)/inc
 
-SRC += $(STM32_CUBE_PATH)/CMSIS/$(SERIES_FOLDER)/src/*.c
+    SRC += $(STM32_CUBE_PATH)/CMSIS/$(SERIES_FOLDER)/src/*.c
 endif
 
 # Include the HAL files
 ifdef USE_ST_HAL
-GCC_FLAGS += -D USE_HAL_DRIVER
-GCC_FLAGS += -I$(STM32_CUBE_PATH)/HAL/$(SERIES_FOLDER)/inc
+    GCC_FLAGS += -D USE_HAL_DRIVER
+    GCC_FLAGS += -I$(STM32_CUBE_PATH)/HAL/$(SERIES_FOLDER)/inc
 
-SRC += $(STM32_CUBE_PATH)/HAL/$(SERIES_FOLDER)/src/*.c
+    SRC += $(STM32_CUBE_PATH)/HAL/$(SERIES_FOLDER)/src/*.c
 endif
 
 # Make all
