@@ -1,13 +1,8 @@
-.syntax unified
-.cpu cortex-m3
-.fpu softvfp
-.thumb
+.include "startup_common.s"
 
 // 0x108: Boot in RAM mode on STM32F1xx Medium Density devices.
 // ldr.w pc, [pc, #-264]
 .equ BootRAM, 0xF108F85F
-
-.include "startup_common.s"
 
 .section .isr_vector, "a", %progbits
 .type vector_table, %object

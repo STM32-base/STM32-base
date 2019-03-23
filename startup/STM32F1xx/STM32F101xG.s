@@ -1,12 +1,7 @@
-.syntax unified
-.cpu cortex-m3
-.fpu softvfp
-.thumb
+.include "startup_common.s"
 
 // 0x01E0: Boot in RAM mode on STM32F10x XL-Density devices.
 .equ BootRAM, 0xF1E0F85F
-
-.include "startup_common.s"
 
 .section .isr_vector, "a", %progbits
 .type vector_table, %object

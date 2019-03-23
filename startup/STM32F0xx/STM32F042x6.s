@@ -1,8 +1,3 @@
-.syntax unified
-.cpu cortex-m0
-.fpu softvfp
-.thumb
-
 .include "startup_common.s"
 
 .section .isr_vector, "a", %progbits

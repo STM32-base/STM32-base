@@ -1,12 +1,7 @@
-.syntax unified
-.cpu cortex-m4
-.fpu softvfp
-.thumb
+.include "startup_common.s"
 
 .word __ccmdata_start
 .word __ccmdata_end
-
-.include "startup_common.s"
 
 .section .isr_vector, "a", %progbits
 .type vector_table, %object

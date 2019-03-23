@@ -1,3 +1,5 @@
+.syntax unified
+
 .global Default_Handler
 .global Reset_Handler
 
