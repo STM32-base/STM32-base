@@ -1,21 +1,21 @@
 # Contributing to the STM32-base project
 
-First of all, thank you for showing interest in contributing to this project! Here you will find the information you need to contribute to this project.
+Thank you for showing your interest in contributing to the STM32-base project!
 
-## Issues
+## Creating an issue
 
-The most simple way you can contribute to this project is by creating an issue on Github. These issues can be created for both bugs and feature requests. So if you think something is not working properly or if you are missing something, hit the "Create issue" button! Github will be used to register and track these issues. Issues can be created for both the actual code and for the documentation (wiki included). _Please do not create issues for questions!_
+A contribution starts with creating an issue. There are exceptions to this, keep reading! You can create an issue for bugs, ideas, features, and questions.
 
-Note that creating an issue does not directly mean your bug will be fixed or the feature you are requesting will be built. At the moment, I am the only one working on this project. Unfortunately, I do have a limited amount of time available to work on this project. It I am not able to resolve your issue any time soon, I will let you know and will leave the issue open for others to see and possibly solve.
+All issues should be reported on Github. Issues about makefiles, linker scripts, startup code, and template repositories should be reported on the [STM32-base repository](https://github.com/STM32-base/STM32-base). Issues about documentation should be reported on the [STM32-base.github.io repository](https://github.com/STM32-base/STM32-base.github.io).
 
-If you are able to resolve the issue you created, a pull request would really help a lot!
+## Creating a pull request
 
-## Contributing
+If you are able to fix or add something yourself, please do so! Remember to create an issue before you start. This will enables others to provide you with background information, if needed. When you're done, create a pull request.
 
-A contribution can originate from multiple sources. You can either spot something in the code or documentation that is wrong or can be better solved/explained in another way. If you want to contribute, but don't know what exactly, you can take a look at the open issues and at the roadmap. Please let me know in advance if you want to address a issue or roadmap item so I can keep track of who's doing what. I may also be able to provide you with some additional information.
+There are some exceptions to creating an issue before you get started. If you find a small error somewhere, in both the documentation or code, you can create a pull request without an issue linked to it. Generally, if your change affects less than ten lines, you can continue without an issue.
 
-When you are done with your work, please create a pull request so we can review the contribution together and optionally discuss some of the changes made. When you are contributing to anything code related, make sure to at least test the changes with one device. When we're both happy with the final changes, I will merge your changes to the master branch.
+Take a look at the [roadmap board](https://github.com/orgs/STM32-base/projects/1) if you want to contribute but don't know what you can do.
 
-## Testing
+## Personal note
 
-Another way of contributing is testing with devices and boards I do not own. Please let me know you tested a device or board by creating a pull request on one of the wiki pages.
+Please keep in mind that I am currently the only one working on this project. It may take some time before I am able to review and merge your pull request. I really appreciate it when you take the time to contribute!
