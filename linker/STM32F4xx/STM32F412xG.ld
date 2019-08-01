@@ -1,8 +1,11 @@
+/* Define memory blocks */
 MEMORY {
-    FLASH   (rx) : ORIGIN = 0x08000000, LENGTH = 1M
-    RAM    (rwx) : ORIGIN = 0x20000000, LENGTH = 256K
-
-    CCMRAM (rwx) : ORIGIN = 0x10000000, LENGTH = 0K
+    FLASH_BANK_1  (rx) : ORIGIN = 0x08000000, LENGTH = 1024K
+    SRAM_1       (rwx) : ORIGIN = 0x20000000, LENGTH = 256K
 }
 
+/* Include project configuration */
+INCLUDE config.ld
+
+/* Include common linker script */
 INCLUDE common.ld
