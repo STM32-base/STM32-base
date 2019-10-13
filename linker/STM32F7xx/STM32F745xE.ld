@@ -1,4 +1,4 @@
-/* Define memory blocks */
+/* Define memory regions */
 MEMORY {
     FLASH_BANK_1  (rx) : ORIGIN = 0x08000000, LENGTH = 512K
     FLASH_ITCM    (rx) : ORIGIN = 0x00200000, LENGTH = 512K

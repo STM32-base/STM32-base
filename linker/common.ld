@@ -95,19 +95,6 @@ SECTIONS {
         __bss_end__ = __bss_end;
     } > RAM
 
-    __cmmdata_flash_start = LOADADDR(.ccmram);
-
-    .ccmram : {
-        . = ALIGN(4);
-        __ccmdata_start = .;
-
-        *(.ccmram)
-        *(.ccmram*)
-
-        . = ALIGN(4);
-        __ccmdata_end = .;
-    } > CCMRAM AT> FLASH
-
     ._user_heap_stack : {
         . = ALIGN(4);
         PROVIDE ( end = . );
