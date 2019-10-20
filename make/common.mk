@@ -123,7 +123,9 @@ ifdef USE_ST_HAL
     GCC_FLAGS += -D USE_HAL_DRIVER
     GCC_FLAGS += -I$(STM32_CUBE_PATH)/HAL/$(SERIES_FOLDER)/inc
 
-    SRC += $(STM32_CUBE_PATH)/HAL/$(SERIES_FOLDER)/src/*.c
+    # A simply expanded variable is used here to perform the find command only once.
+    HAL_SRC := $(shell find $(STM32_CUBE_PATH)/HAL/$(SERIES_FOLDER)/src/*.c ! -name '*_template.c')
+    SRC += $(HAL_SRC)
 endif
 
 # Make all
