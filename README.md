@@ -29,4 +29,3 @@ The STM32-base documentation contains a lot of information on many different STM
 ## Contributing
 
 Refer to the [`CONTRIBUTING.md`](https://github.com/STM32-base/STM32-base/blob/master/CONTRIBUTING.md) file to learn more about contributing to the STM32-base project. Take a look at the [roadmap](https://stm32-base.org/general/roadmap) if you are looking for things to work on.
-
