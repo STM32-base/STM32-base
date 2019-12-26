@@ -373,4 +373,3 @@ vector_table:
 
 .weak HASH_RNG_IRQHandler
 .thumb_set HASH_RNG_IRQHandler, Default_Handler
-
