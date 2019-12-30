@@ -46,52 +46,48 @@ OBJCOPY = $(TOOLCHAIN_PATH)$(TOOLCHAIN_SEPARATOR)arm-none-eabi-objcopy
 OBJDUMP = $(TOOLCHAIN_PATH)$(TOOLCHAIN_SEPARATOR)arm-none-eabi-objdump
 SIZE    = $(TOOLCHAIN_PATH)$(TOOLCHAIN_SEPARATOR)arm-none-eabi-size
 
-# Default for flags
-GCC_FLAGS ?=
-
 # Flags - Overall Options
-GCC_FLAGS += -specs=nosys.specs
+CPPFLAGS += -specs=nosys.specs
 
 # Flags - C Language Options
-GCC_FLAGS += -ffreestanding
-# GCC_FLAGS += -std=c11
+CFLAGS += -ffreestanding
 
 # Flags - C++ Language Options
-GCC_FLAGS += -fno-threadsafe-statics
-GCC_FLAGS += -fno-rtti
-GCC_FLAGS += -fno-exceptions
-GCC_FLAGS += -fno-unwind-tables
+CXXFLAGS += -fno-threadsafe-statics
+CXXFLAGS += -fno-rtti
+CXXFLAGS += -fno-exceptions
+CXXFLAGS += -fno-unwind-tables
 
 # Flags - Warning Options
-GCC_FLAGS += -Wall
-GCC_FLAGS += -Wextra
+CPPFLAGS += -Wall
+CPPFLAGS += -Wextra
 
 # Flags - Debugging Options
-GCC_FLAGS += -g
+CPPFLAGS += -g
 
 # Flags - Optimization Options
-GCC_FLAGS += -ffunction-sections
-GCC_FLAGS += -fdata-sections
+CPPFLAGS += -ffunction-sections
+CPPFLAGS += -fdata-sections
 
 # Flags - Preprocessor options
-GCC_FLAGS += -D $(MAPPED_DEVICE)
+CPPFLAGS += -D $(MAPPED_DEVICE)
 
 # Flags - Assembler Options
 
 # Flags - Linker Options
-# GCC_FLAGS += -nostdlib
-GCC_FLAGS += -Wl,-L$(BASE_LINKER),-T$(BASE_LINKER)/$(SERIES_FOLDER)/$(DEVICE).ld
+# CPPFLAGS += -nostdlib
+CPPFLAGS += -Wl,-L$(BASE_LINKER),-T$(BASE_LINKER)/$(SERIES_FOLDER)/$(DEVICE).ld
 
 # Flags - Directory Options
-GCC_FLAGS += -I./inc
-GCC_FLAGS += -I$(BASE_STARTUP)
+CPPFLAGS += -I./inc
+CPPFLAGS += -I$(BASE_STARTUP)
 
 # Flags - Machine-dependant options
-GCC_FLAGS += -mcpu=$(SERIES_CPU)
-GCC_FLAGS += -march=$(SERIES_ARCH)
-GCC_FLAGS += -mlittle-endian
-GCC_FLAGS += -mthumb
-GCC_FLAGS += -masm-syntax-unified
+CPPFLAGS += -mcpu=$(SERIES_CPU)
+CPPFLAGS += -march=$(SERIES_ARCH)
+CPPFLAGS += -mlittle-endian
+CPPFLAGS += -mthumb
+CPPFLAGS += -masm-syntax-unified
 
 # Output files
 ELF_FILE_NAME ?= stm32_executable.elf
@@ -111,17 +107,17 @@ DEVICE_STARTUP = $(BASE_STARTUP)/$(SERIES_FOLDER)/$(MAPPED_DEVICE).s
 
 # Include the CMSIS files, using the HAL implies using the CMSIS
 ifneq (,$(or USE_ST_CMSIS, USE_ST_HAL))
-    GCC_FLAGS += -D CALL_ARM_SYSTEM_INIT
-    GCC_FLAGS += -I$(STM32_CUBE_PATH)/CMSIS/ARM/inc
-    GCC_FLAGS += -I$(STM32_CUBE_PATH)/CMSIS/$(SERIES_FOLDER)/inc
+    CPPFLAGS += -D CALL_ARM_SYSTEM_INIT
+    CPPFLAGS += -I$(STM32_CUBE_PATH)/CMSIS/ARM/inc
+    CPPFLAGS += -I$(STM32_CUBE_PATH)/CMSIS/$(SERIES_FOLDER)/inc
 
     SRC += $(STM32_CUBE_PATH)/CMSIS/$(SERIES_FOLDER)/src/*.c
 endif
 
 # Include the HAL files
 ifdef USE_ST_HAL
-    GCC_FLAGS += -D USE_HAL_DRIVER
-    GCC_FLAGS += -I$(STM32_CUBE_PATH)/HAL/$(SERIES_FOLDER)/inc
+    CPPFLAGS += -D USE_HAL_DRIVER
+    CPPFLAGS += -I$(STM32_CUBE_PATH)/HAL/$(SERIES_FOLDER)/inc
 
     # A simply expanded variable is used here to perform the find command only once.
     HAL_SRC := $(shell find $(STM32_CUBE_PATH)/HAL/$(SERIES_FOLDER)/src/*.c ! -name '*_template.c')
@@ -135,10 +131,10 @@ $(BIN_FILE_PATH): $(ELF_FILE_PATH)
 	$(OBJCOPY) -O binary $^ $@
 
 $(ELF_FILE_PATH): $(SRC) $(OBJ_FILE_PATH) | $(BIN_FOLDER)
-	$(CXX) $(GCC_FLAGS) $^ -o $@
+	$(CXX) $(CPPFLAGS) $(CXXFLAGS) $^ -o $@
 
 $(OBJ_FILE_PATH): $(DEVICE_STARTUP) | $(OBJ_FOLDER)
-	$(CXX) $(GCC_FLAGS) $^ -c -o $@
+	$(CXX) -c $(CPPFLAGS) $(CXXFLAGS) $^ -o $@
 
 $(BIN_FOLDER):
 	mkdir $(BIN_FOLDER)
