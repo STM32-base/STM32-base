@@ -4,6 +4,14 @@ ENTRY(Reset_Handler)
 
 __end_stack = ORIGIN(RAM) + LENGTH(RAM);
 
+/* INCLUDE section-vector.ld
+INCLUDE section-text.ld
+INCLUDE section-rodata.ld
+INCLUDE section-data.ld
+INCLUDE section-bss.ld
+ */
+
+
 SECTIONS {
     /* Put startup code into FLASH, ALWAYS DO THIS FIRST */
     .isr_vector : {

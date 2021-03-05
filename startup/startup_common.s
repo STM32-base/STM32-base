@@ -41,25 +41,6 @@ LoopCopyData:
     cmp  r4, r2
     bcc  CopyData
 
-.ifdef __ccmdata_start
-// Copy the initialized global variables to CCM
-    movs r0, #0
-    ldr  r1, = __ccmdata_start
-    ldr  r2, = __ccmdata_end
-    ldr  r3, = __ccmdata_flash_start
-    b    LoopCopyCCMData
-
-CopyCCMData:
-    ldr  r4, [r3, r0]
-    str  r4, [r1, r0]
-    adds r0, r0, #4
-
-LoopCopyCCMData:
-    adds r4, r1, r0
-    cmp  r4, r2
-    bcc  CopyCCMData
-.endif
-
 // Fill uninitialized variables with zeros
     movs r0, #0
     ldr  r1, = __bss_start
