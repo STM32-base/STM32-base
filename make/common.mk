@@ -73,6 +73,9 @@ CPPFLAGS += -fdata-sections
 CPPFLAGS += -D $(MAPPED_DEVICE)
 
 # Flags - Assembler Options
+ifneq (,$(or USE_ST_CMSIS, USE_ST_HAL))
+    CPPFLAGS += -Wa,--defsym,CALL_ARM_SYSTEM_INIT=1
+endif
 
 # Flags - Linker Options
 # CPPFLAGS += -nostdlib
@@ -107,7 +110,6 @@ DEVICE_STARTUP = $(BASE_STARTUP)/$(SERIES_FOLDER)/$(MAPPED_DEVICE).s
 
 # Include the CMSIS files, using the HAL implies using the CMSIS
 ifneq (,$(or USE_ST_CMSIS, USE_ST_HAL))
-    CPPFLAGS += -D CALL_ARM_SYSTEM_INIT
     CPPFLAGS += -I$(STM32_CUBE_PATH)/CMSIS/ARM/inc
     CPPFLAGS += -I$(STM32_CUBE_PATH)/CMSIS/$(SERIES_FOLDER)/inc
 
