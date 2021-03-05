@@ -1,21 +1,15 @@
 # Contributing to the STM32-base project
 
-Thank you for showing your interest in contributing to the STM32-base project!
+Thank you for showing interest in contributing to the STM32-base project!
 
-## Creating an issue
+## Scope
 
-A contribution starts with creating an issue. There are exceptions to this, keep reading! You can create an issue for bugs, ideas, features, and questions.
+The scope of STM32-base is limited to makefiles, linker scripts, and startup code. This repository shall not contain any C or C++ code. The scope of the project templates is limited to only those files which are required to make the flash example work.
 
-All issues should be reported on Github. Issues about makefiles, linker scripts, startup code, and template repositories should be reported on the [STM32-base repository](https://github.com/STM32-base/STM32-base). Issues about documentation should be reported on the [STM32-base.github.io repository](https://github.com/STM32-base/STM32-base.github.io).
+## Reporting an issue
+
+Issues must be reported on Github. You can create an issue for bugs, ideas, features, and questions. You can report issues on this repository for this repository and for all the template repositories. Issues found in the documentation hosted on [stm32-base.org](https://stm32-base.org/) must be reported on the [STM32-base.github.io repository](https://github.com/STM32-base/STM32-base.github.io).
 
 ## Creating a pull request
 
-If you are able to fix or add something yourself, please do so! Remember to create an issue before you start. This will enables others to provide you with background information, if needed. When you're done, create a pull request.
-
-There are some exceptions to creating an issue before you get started. If you find a small error somewhere, in both the documentation or code, you can create a pull request without an issue linked to it. Generally, if your change affects less than ten lines, you can continue without an issue.
-
-Take a look at the [roadmap board](https://github.com/orgs/STM32-base/projects/1) if you want to contribute but don't know what you can do.
-
-## Personal note
-
-Please keep in mind that I am currently the only one working on this project. It may take some time before I am able to review and merge your pull request. I really appreciate it when you take the time to contribute!
+If you are able to fix or add something yourself, please do so! You can proceed without reporting an issue for small fixes that do not affect more than 10 lines of code. Please report an issue if you want work on something bigger.
