@@ -6,8 +6,5 @@ MEMORY {
     CCM_SRAM     (rwx) : ORIGIN = 0x10000000, LENGTH = 64K
 }
 
-/* Include project configuration */
-INCLUDE config.ld
-
 /* Include common linker script */
 INCLUDE common.ld

@@ -9,8 +9,5 @@ MEMORY {
     BKP_SRAM      (rw) : ORIGIN = 0x40024000, LENGTH = 4K
 }
 
-/* Include project configuration */
-INCLUDE config.ld
-
 /* Include common linker script */
 INCLUDE common.ld

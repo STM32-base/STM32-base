@@ -1,27 +1,30 @@
+/* Include project linker configuration */
+INCLUDE config.ld
+
 OUTPUT_FORMAT("elf32-littlearm", "elf32-bigarm", "elf32-littlearm")
 
 ENTRY(Reset_Handler)
 
 __end_stack = ORIGIN(RAM) + LENGTH(RAM);
 
-/* INCLUDE section-vector.ld
+INCLUDE section-vector.ld
 INCLUDE section-text.ld
 INCLUDE section-rodata.ld
 INCLUDE section-data.ld
 INCLUDE section-bss.ld
- */
+
 
 
 SECTIONS {
     /* Put startup code into FLASH, ALWAYS DO THIS FIRST */
-    .isr_vector : {
+    /* .isr_vector : {
         . = ALIGN(4);
         KEEP(*(.isr_vector));
         . = ALIGN(4);
-    } > FLASH
+    } > FLASH */
 
     /* Put program code and other data into FLASH */
-    .text : {
+    /* .text : {
         . = ALIGN(4);
         __text_start = .;
 
@@ -36,10 +39,10 @@ SECTIONS {
 
         . = ALIGN(4);
         __text_end = .;
-    } > FLASH
+    } > FLASH */
 
     /* Put constant (read-only) data into FLASH */
-    .rodata : {
+    /* .rodata : {
         . = ALIGN(4);
         __rodata_start = .;
 
@@ -48,7 +51,7 @@ SECTIONS {
 
         . = ALIGN(4);
         __rodata_end = .;
-    } > FLASH
+    } > FLASH */
 
     .ARM.extab : {
         *(.ARM.extab* .gnu.linkonce.armextab.*)
@@ -78,7 +81,7 @@ SECTIONS {
 
     __data_flash_start = LOADADDR(.data);
 
-    .data : {
+    /* .data : {
         . = ALIGN(4);
         __data_start = .;
 
@@ -87,9 +90,9 @@ SECTIONS {
 
         . = ALIGN(4);
         __data_end = .;
-    } > RAM AT> FLASH
+    } > RAM AT> FLASH */
 
-    .bss : {
+    /* .bss : {
         . = ALIGN(4);
         __bss_start = .;
         __bss_start__ = __bss_start;
@@ -101,7 +104,7 @@ SECTIONS {
         . = ALIGN(4);
         __bss_end = .;
         __bss_end__ = __bss_end;
-    } > RAM
+    } > RAM */
 
     ._user_heap_stack : {
         . = ALIGN(4);
