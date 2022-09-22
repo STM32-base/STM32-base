@@ -7,6 +7,13 @@ ifndef FLASH
     $(error Please set the required FLASH variable in your makefile.)
 endif
 
+ifeq ($(FLASHING_TOOL), stm32flash)
+	ifndef FLASHING_SERIAL_PORT
+		$(error Please set the required FLASHING_SERIAL_PORT variable in your makefile)
+	endif
+endif
+	
+
 # Standard values for (linked) STM32-base folders
 STM32_BASE_PATH   ?= ./STM32-base
 STM32_CUBE_PATH   ?= ./STM32-base-STM32Cube
@@ -28,6 +35,9 @@ include $(BASE_MAKE)/series-folder-name.mk
 # Include the series-specific makefile
 include $(BASE_MAKE)/$(SERIES_FOLDER)/common.mk
 MAPPED_DEVICE ?= $(DEVICE)
+
+# Default flashing tool is st-flash
+FLASHING_TOOL ?= st-flash
 
 # The toolchain path, defaults to using the globally installed toolchain
 ifdef TOOLCHAIN_PATH
@@ -154,6 +164,12 @@ clean:
 
 # Make flash
 flash:
+ifeq ($(FLASHING_TOOL), st-flash)
 	st-flash write $(BIN_FOLDER)/$(BIN_FILE_NAME) $(FLASH)
+else ifeq ($(FLASHING_TOOL), stm32flash)
+	stm32flash -w $(BIN_FOLDER)/$(BIN_FILE_NAME) -v -R $(FLASHING_SERIAL_PORT)
+else
+	$(error $(FLASHING_TOOL) not recognized)
+endif
 
 .PHONY: all clean flash
