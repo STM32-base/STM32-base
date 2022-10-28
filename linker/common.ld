@@ -5,17 +5,20 @@ OUTPUT_FORMAT("elf32-littlearm", "elf32-bigarm", "elf32-littlearm")
 
 ENTRY(Reset_Handler)
 
-__end_stack = ORIGIN(RAM) + LENGTH(RAM);
+__end_stack = ORIGIN(SRAM_1) + LENGTH(SRAM_1);
 
-INCLUDE section-vector.ld
+/* Include all bits and pieces */
+INCLUDE section-isr-vector.ld
 INCLUDE section-text.ld
 INCLUDE section-rodata.ld
 INCLUDE section-data.ld
 INCLUDE section-bss.ld
+INCLUDE section-cpp.ld
+INCLUDE section-arm.ld
+INCLUDE section-debug.ld
+INCLUDE section-discard.ld
 
-
-
-SECTIONS {
+/* SECTIONS { */
     /* Put startup code into FLASH, ALWAYS DO THIS FIRST */
     /* .isr_vector : {
         . = ALIGN(4);
@@ -53,7 +56,7 @@ SECTIONS {
         __rodata_end = .;
     } > FLASH */
 
-    .ARM.extab : {
+    /* .ARM.extab : {
         *(.ARM.extab* .gnu.linkonce.armextab.*)
     } > FLASH
 
@@ -61,9 +64,9 @@ SECTIONS {
         __exidx_start = .;
         *(.ARM.exidx*)
         __exidx_end = .;
-    } > FLASH
+    } > FLASH */
 
-    .preinit_array : {
+    /* .preinit_array : {
         PROVIDE_HIDDEN(__preinit_array_start = .);
         KEEP(*(.preinit_array*))
         PROVIDE_HIDDEN(__preinit_array_end = .);
@@ -77,9 +80,9 @@ SECTIONS {
         PROVIDE_HIDDEN(__fini_array_start = .);
         KEEP(*(.fini_array*))
         PROVIDE_HIDDEN(__fini_array_end = .);
-    } > FLASH
+    } > FLASH */
 
-    __data_flash_start = LOADADDR(.data);
+    /* __data_flash_start = LOADADDR(.data); */
 
     /* .data : {
         . = ALIGN(4);
@@ -106,22 +109,18 @@ SECTIONS {
         __bss_end__ = __bss_end;
     } > RAM */
 
-    ._user_heap_stack : {
+    /* ._user_heap_stack : {
         . = ALIGN(4);
         PROVIDE ( end = . );
         PROVIDE ( _end = . );
         . = . + 0x200;
         . = . + 0x400;
         . = ALIGN(4);
-    } > RAM
+    } > RAM */
 
-    /DISCARD/ : {
+    /* /DISCARD/ : {
         libc.a(*)
         libm.a(*)
         libgcc.a(*)
-    }
-
-    .ARM.attributes 0 : {
-        *(.ARM.attributes)
-    }
-}
+    } */
+/* } */

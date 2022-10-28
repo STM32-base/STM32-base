@@ -91,7 +91,7 @@ endif
 
 # Flags - Linker Options
 # CPPFLAGS += -nostdlib
-CPPFLAGS += -Wl,-L$(BASE_LINKER),-L$(BASE_LINKER)/common,-L./config,-T$(BASE_LINKER)/$(SERIES_FOLDER)/$(DEVICE).ld
+CPPFLAGS += -Wl,-L$(BASE_LINKER),-L$(BASE_LINKER)/sections,-L./config,-T$(BASE_LINKER)/$(SERIES_FOLDER)/$(DEVICE).ld
 
 # Flags - Directory Options
 CPPFLAGS += -I$(INC_FOLDER)

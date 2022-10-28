@@ -1,5 +1,5 @@
 /**
- * Puts the .text section into memory. This section contains the actual code.
+ * Puts the .text section into memory. This section contains the compiled code.
  *
  * Uses:
  *  - REGION_TEXT
