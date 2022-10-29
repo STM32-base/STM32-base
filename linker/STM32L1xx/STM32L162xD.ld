@@ -1,0 +1,9 @@
+/* Define memory regions */
+MEMORY {
+    FLASH_BANK_1   (rx) : ORIGIN = 0x08000000, LENGTH = 192K
+    FLASH_BANK_2   (rx) : ORIGIN = 0x08030000, LENGTH = 192K
+    SRAM_1        (rwx) : ORIGIN = 0x20000000, LENGTH = 48K
+}
+
+/* Include common linker script */
+INCLUDE common.ld
