@@ -5,7 +5,7 @@
  *   - REGION_DATA_VMA
  *   - REGION_DATA_LMA
  *
- * Provides:
+ * Exposes:
  *   - __data_start : The start address of the .data section.
  *   - __data_end   : The end address of the .data section.
  */

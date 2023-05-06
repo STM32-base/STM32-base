@@ -1,6 +1,7 @@
 /**
- *
+ * Puts the debugging sections in the ELF output file.
  */
+
 SECTIONS {
     /* STABS Debugging sections */
     .stab            0 : { *(.stab) }

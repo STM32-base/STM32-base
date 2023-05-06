@@ -4,7 +4,7 @@
  * Uses:
  *   - REGION_RODATA
  *
- * Provides:
+ * Exposes:
  *   - __rodata_start : The start address of the .rodata section.
  *   - __rodata_end   : The end address of the .rodata section.
  */

@@ -1,5 +1,5 @@
 /**
- * Puts the .preinit_array, .init_array, and .fini_array into memory. These
+ * Puts the .preinit_array, .init_array, and .fini_array in memory. These
  * sections contain pointers to functions.
  *
  * Uses:
@@ -9,7 +9,7 @@
  *   - REGION_INIT_ARRAY
  *   - REGION_FINI_ARRAY
  *
- * Provides:
+ * Exposes:
  *   - __preinit_array_start
  *   - __preinit_array_end
  *   - __init_array_start

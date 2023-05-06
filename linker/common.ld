@@ -1,22 +1,24 @@
 /* Include project linker configuration */
 INCLUDE config.ld
 
+/* Explicitly set the output format of the ELF file to littlearm */
 OUTPUT_FORMAT("elf32-littlearm", "elf32-bigarm", "elf32-littlearm")
 
+/* Define the Reset_Handler as entry point */
 ENTRY(Reset_Handler)
 
 __end_stack = ORIGIN(SRAM_1) + LENGTH(SRAM_1);
 
 /* Include all bits and pieces */
-INCLUDE section-isr-vector.ld
-INCLUDE section-text.ld
-INCLUDE section-rodata.ld
-INCLUDE section-data.ld
-INCLUDE section-bss.ld
-INCLUDE section-cpp.ld
-INCLUDE section-arm.ld
-INCLUDE section-debug.ld
-INCLUDE section-discard.ld
+INCLUDE isr-vector.ld
+INCLUDE text.ld
+INCLUDE rodata.ld
+INCLUDE data.ld
+INCLUDE bss.ld
+INCLUDE cpp.ld
+INCLUDE arm.ld
+INCLUDE debug.ld
+INCLUDE discard.ld
 
 /* SECTIONS { */
     /* Put startup code into FLASH, ALWAYS DO THIS FIRST */

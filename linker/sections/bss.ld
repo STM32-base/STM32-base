@@ -4,7 +4,7 @@
  * Uses:
  *   - REGION_BSS
  *
- * Provides:
+ * Exposes:
  *   - __bss_start   : The start address of the .bss section.
  *   - __bss_start__ : Same as __bss_start.
  *   - __bss_end     : The end address of the .bss section.
