@@ -12,7 +12,6 @@ ifeq ($(FLASHING_TOOL), stm32flash)
 		$(error Please set the required FLASHING_SERIAL_PORT variable in your makefile)
 	endif
 endif
-	
 
 # Standard values for (linked) STM32-base folders
 STM32_BASE_PATH   ?= ./STM32-base
@@ -91,7 +90,7 @@ endif
 
 # Flags - Linker Options
 # CPPFLAGS += -nostdlib
-CPPFLAGS += -Wl,-L$(BASE_LINKER),-L$(BASE_LINKER)/sections,-L./config,-T$(BASE_LINKER)/$(SERIES_FOLDER)/$(DEVICE).ld
+CPPFLAGS += -Wl,-L$(BASE_LINKER),-L$(BASE_LINKER)/sections,-L./linker,-T$(BASE_LINKER)/$(SERIES_FOLDER)/$(DEVICE).ld
 
 # Flags - Directory Options
 CPPFLAGS += -I$(INC_FOLDER)
